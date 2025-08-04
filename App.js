@@ -6,11 +6,14 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import todoRoutes from "./routes/todoRoutes.js";
 // import llmRoutes from "./routes/oneroute.js"
-import llmRoutes from "./routes/askroute.js"
-
+import llmRoutes from "./routes/askroute.js";
 
 dotenv.config();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://todo-and-ask-l-lm-frontend-ikyf.vercel.app",
+  })
+);
 app.use(express.json());
 
 mongoose
@@ -19,8 +22,7 @@ mongoose
   .catch((err) => console.log("Error connecting to MongoDB:", err));
 
 app.use("/api/todos", todoRoutes);
-app.use("/api/ask",llmRoutes);
-
+app.use("/api/ask", llmRoutes);
 
 app.get("/", (req, res) => {
   res.send("This is root of the page");
