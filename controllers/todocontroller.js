@@ -1,14 +1,18 @@
 import Todo from "../models/Task.js";
 
 export const getTodos = async (req, res) => {
-  const { username } = req.query;
-  const todos = await Todo.find({ username });
+  const todos = await Todo.find();
   res.json(todos);
 };
 
 export const createTodo = async (req, res) => {
-  const { title, username } = req.body;
-  const todo = new Todo({ title, username });
+  console.log("Received data:", req.body);
+  const { title } = req.body;
+  if (!title) {
+    return res.status(400).json({ message: "Title required" });
+  }
+
+  const todo = new Todo({ title }); // ✅ Removed username
   await todo.save();
   res.status(201).json(todo);
 };

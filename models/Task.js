@@ -10,6 +10,9 @@ const todoSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  username: {
+    type: String,
+  },
 });
 const Todo = mongoose.model("Todo", todoSchema);
 export default Todo;
