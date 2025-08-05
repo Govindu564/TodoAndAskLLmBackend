@@ -9,7 +9,7 @@ import llmRoutes from "./routes/askroute.js";
 
 
 dotenv.config();
-app.use(cors());
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 
 mongoose
